@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kathai.AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1 class="title">Kathai.AI</h1>
+    <form action="/generate" method="post">
+        <textarea name="user_input" placeholder="Enter your text here:" required></textarea>
+        <select name="option">
+            <option value="Tamil">Tamil</option>
+            <option value="English">English</option>
+        </select>
+        <div class="button-group">
+            <button type="submit" class="generate-button">Generate</button>
+            <a href="/clear" class="clear-button">Clear</a>
+        </div>
+    </form>
+
+    {% if output %}
+        <div class="output">
+            <h2>Generated Output:</h2>
+            <p>{{ output }}</p>
+            <audio controls autoplay>
+                <source src="{{ url_for('static', filename='tamil.mp3') }}" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+            <a href="/download_audio" class="download-link">Download Audio</a>
+        </div>
+    {% endif %}
+
+    <div class="video-container">
+        <h2>Play Video</h2>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/jPwe1s__9fs" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+</body>
+</html>
